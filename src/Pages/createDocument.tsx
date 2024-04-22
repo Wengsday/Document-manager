@@ -49,7 +49,6 @@ export default function CreateDocument() {
     const base64String = await getBase64(file);
     const fileName = file?.type
 
-    console.log(base64String);
     const s3Input: Inputs = {
       name: data.name,
       type: fileName,
