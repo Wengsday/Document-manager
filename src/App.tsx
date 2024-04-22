@@ -1,4 +1,4 @@
-import { theme } from "./Themes";
+import  theme  from "./Themes";
 import {
   ChakraProvider,
   Flex,
@@ -12,7 +12,6 @@ import {
 
 import CreateDocument from "./Pages/createDocument";
 import DocumentList from "./Pages/documentList";
-import Home from "./Pages/viewDocument";
 
 export default function App() {
   return (

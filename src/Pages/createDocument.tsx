@@ -10,14 +10,14 @@ import {
   Center,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { theme } from "../Themes";
+import  theme  from "../Themes";
 import axios from "axios";
 
 type Inputs = {
   name: string;
-  type: string;
+  type: string | undefined;
   description: string;
-  base64: string;
+  base64: String;
 };
 
 const getBase64 = (file): Promise<String> => {
@@ -43,21 +43,21 @@ export default function CreateDocument() {
     await sendToS3(data);
   };
 
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<File>();
 
   const sendToS3 = async (data) => {
     const base64String = await getBase64(file);
+    const fileName = file?.type
 
     console.log(base64String);
     const s3Input: Inputs = {
       name: data.name,
-      type: file.type,
+      type: fileName,
       description: data.description,
       base64: base64String,
     };
     axios
-      .post(`http://localhost:4000/documents`, { s3Input })
-      .then((res) => {});
+      .post(`http://localhost:4000/documents`, s3Input)
     window.location.reload();
   };
 

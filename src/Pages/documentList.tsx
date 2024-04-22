@@ -13,12 +13,12 @@ import {
 
 import { CloseIcon } from "@chakra-ui/icons";
 
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { triggerBase64Download } from "react-base64-downloader";
 import React, { useState, useEffect } from "react";
 
 const DocumentList = () => {
-  const [documents, setDocuments] = useState([]);
+  const [documents, setDocuments] = useState<AxiosResponse | null | void>(null);;
 
   type Document = {
     id: string;
@@ -35,7 +35,7 @@ const DocumentList = () => {
       setDocuments(documentsList);
     }
     getDocuments();
-  });
+  }, []);
 
   return (
     <Box w="100">
@@ -54,7 +54,7 @@ const DocumentList = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {documents.map((item) => (
+            {documents?.data.map((item) => (
               <Tr>
                 <Td>{item.id}</Td>
                 <Td>{item.type}</Td>
@@ -107,9 +107,10 @@ function downloadPDF(base64, name) {
 }
 
 async function deleteDocument(id: String) {
-  const downloadedDoc = await axios.delete(
+  const downloadedDoc = await axios.post(
     `http://localhost:4000/documents/${id}`
   );
+  window.location.reload();
 }
 
 export default DocumentList;
