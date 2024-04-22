@@ -40,6 +40,14 @@ Frontend defaults to running on Port:3000 and Backend defaults to running on Por
 
 No need, the tokens are hardcoded and access is programmatic. In a real life scenario, they would be hosted on a secrets.yaml or on the infra platform level, but for the sake of this exercise I've hardcoded the credentials. I could have put them in a .env file but ultimately since it's visible and hardcoded there anyway, it makes no difference. 
 
+# How to use App 
+
+Play around! 
+
+The list of objects is empty because I cleared the bucket out after testing. But, create a new object on the tab and it will appear on your list. Press the arrow to delete it, and the download button to download. 
+
+Please do not try to upload something weird like a .bat file. It will 100% break. 
+
 
 # Why Frontend-Backend Architecture and not NextJS? 
 
@@ -64,4 +72,5 @@ Quite a lot, unfortunately, due to time constraints.
 -frontend code really needs a refactor, putting HTTP requests into helper function files. Time constraints prevented this. 
 -Frontend is relying on useStates, scalability problem again. Look into Redux/Redux toolkit. 
 -the delete endpoint is a post on the backend, because axios is treating delete very strangely. 
--
+-only supports images and pdfs. 
+-Error handling needs refinement, custom Exception objects to be thrown by backend with proper HTTP Code handling. 
